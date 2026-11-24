@@ -1,0 +1,16 @@
+.{
+    .name = .bluff,
+    .version = "0.1.0",
+    .minimum_zig_version = "0.14.0",
+    // Zero third-party Zig package dependencies to keep compile times under 2 seconds
+    // and avoid transitive memory/binary bloat.
+    .dependencies = .{},
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "config",
+        "README.md",
+        "install.sh",
+    },
+}

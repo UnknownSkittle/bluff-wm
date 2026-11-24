@@ -1,0 +1,7 @@
+# BLUFF Default Applications
+apps:
+  terminal: alacritty
+  file_manager: thunar
+  launcher: "rofi -show drun -theme bluff-mono"
+  autostart:
+    - "alacritty"
