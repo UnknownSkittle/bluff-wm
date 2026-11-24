@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# BLUFF Installer for Arch Linux (uses yay to verify & install dependencies first)
-# Usage:
-#   ./install.sh                  # Minimal <= 40 MiB build (XWayland disabled)
-#   ./install.sh --with-xwayland  # Opt-in XWayland bridge (+xorg-xwayland)
+# arch install (yay)
 
 ENABLE_XWAYLAND="false"
 PORTAL_TARGET="lwp_minimal"
@@ -69,7 +66,7 @@ APP_PKGS=(
   thunar
 )
 
-# Avoid conflicts if rofi or rofi-wayland is already installed
+# rofi / rofi-wayland
 if ! command -v rofi >/dev/null 2>&1; then
   if yay -Si rofi-wayland >/dev/null 2>&1; then
     APP_PKGS+=(rofi-wayland)

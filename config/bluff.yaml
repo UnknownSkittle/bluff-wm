@@ -1,6 +1,4 @@
-# BLUFF — Ultra-Lightweight Scrolling Wayland Compositor
-# Author: Unknown_Skittle
-# Target Idle RSS: <= 40 MiB (full graphical session)
+# bluff by Unknown_Skittle (<= 40 MiB idle)
 
 meta:
   name: BLUFF
@@ -22,8 +20,5 @@ layout:
     - 0.6667
 
 opt_in:
-  # Keep false by default to stay under 40 MiB idle RAM.
-  # Must also be compiled with `-Dxwayland=true` if needed.
-  xwayland: false
-  # Lightweight desktop portal: none | lwp-minimal | xdg-desktop-portal-wlr
-  portal: lwp-minimal
+  xwayland: false # -Dxwayland=true
+  portal: lwp-minimal # none | lwp-minimal | xdg-desktop-portal-wlr
