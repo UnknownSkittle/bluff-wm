@@ -10,7 +10,7 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    // Opt-in feature flags: keep idle RSS <= 40 MiB by stripping unused subsystems at comptime.
+    // opt-in flags (<= 40 MiB idle)
     const enable_xwayland = b.option(bool, "xwayland", "Enable opt-in rootless XWayland bridge (+14.2 MiB when active)") orelse false;
     const enable_blur_shader = b.option(bool, "blur-shader", "Compile dual-pass Kawase GLES2 blur shader (+2.1 MiB)") orelse true;
     const enable_rounded_corners = b.option(bool, "rounded-corners", "Compile SDF anti-aliased rounded corner shader (+0.6 MiB)") orelse true;
@@ -35,8 +35,7 @@ pub fn build(b: *std.Build) void {
     });
     exe_mod.addOptions("build_options", options);
 
-    // Pure Zig application linking directly against system Wayland & DRM/GLES2 ABI.
-    // Zero C source files compiled in BLUFF.
+    // wayland + drm + gles2 (no C sources)
     exe_mod.linkSystemLibrary("wayland-server", .{});
     exe_mod.linkSystemLibrary("drm", .{});
     exe_mod.linkSystemLibrary("gbm", .{});
@@ -53,7 +52,7 @@ pub fn build(b: *std.Build) void {
 
     b.installArtifact(exe);
 
-    // Install modular default YAML configs to share/bluff/config
+    // default modular configs
     b.installDirectory(.{
         .source_dir = b.path("config"),
         .install_dir = .prefix,

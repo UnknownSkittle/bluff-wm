@@ -21,12 +21,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Compute short minimal commit message
+      - name: Commit message
         id: msg
         run: |
           BEFORE="${{ github.event.before }}"
           if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
-            echo "text=bluff: init" >> "$GITHUB_OUTPUT"
+            echo "text=init" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -35,16 +35,15 @@ jobs:
 
           if [ "$COUNT" -eq 1 ]; then
             FILE=$(basename "$CHANGED")
-            STEM="${FILE%.*}"
-            echo "text=${STEM}: update" >> "$GITHUB_OUTPUT"
+            echo "text=${FILE%.*}" >> "$GITHUB_OUTPUT"
           elif [ "$COUNT" -le 3 ] && [ "$COUNT" -gt 1 ]; then
-            NAMES=$(echo "$CHANGED" | xargs -n1 basename | sed 's/\.[^.]*$//' | paste -sd ',' -)
-            echo "text=bluff: ${NAMES}" >> "$GITHUB_OUTPUT"
+            NAMES=$(echo "$CHANGED" | xargs -n1 basename | sed 's/\.[^.]*$//' | paste -sd ', ' -)
+            echo "text=${NAMES}" >> "$GITHUB_OUTPUT"
           else
-            echo "text=bluff: sync" >> "$GITHUB_OUTPUT"
+            echo "text=sync" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Push only bluff-compositor to compositor branch
+      - name: Sync compositor branch
         run: |
           git config user.name "Unknown_Skittle"
           git config user.email "actions@users.noreply.github.com"
@@ -63,14 +62,12 @@ jobs:
           git read-tree --reset -u "${SOURCE_SHA}:bluff-compositor"
 
           if git diff --cached --quiet; then
-            echo "No changes in bluff-compositor; skipping push."
             exit 0
           fi
 
           git commit -m "$SHORT_MSG"
           git push origin compositor
 
-          # Optional: if COMPOSITOR_REPO + GH_PAT secrets are configured, also mirror to a separate repo
           if [ -n "${{ secrets.COMPOSITOR_REPO }}" ] && [ -n "${{ secrets.GH_PAT }}" ]; then
             git push "https://x-access-token:${{ secrets.GH_PAT }}@github.com/${{ secrets.COMPOSITOR_REPO }}.git" compositor:main
           fi
