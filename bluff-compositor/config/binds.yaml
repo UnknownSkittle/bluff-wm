@@ -1,0 +1,59 @@
+# 1:1 Niri keybind clone — launcher bound to SUPER+SPACE (ROFI)
+binds:
+  - key: Mod+Space
+    action: spawn
+    args: "rofi -show drun -theme bluff-mono"
+  - key: Mod+Return
+    action: spawn
+    args: "alacritty"
+  - key: Mod+E
+    action: spawn
+    args: "thunar"
+  - key: Mod+Q
+    action: close_window
+
+  # Scrolling strip navigation (1:1 Niri)
+  - key: Mod+Left
+    action: focus_column_left
+  - key: Mod+Right
+    action: focus_column_right
+  - key: Mod+H
+    action: focus_column_left
+  - key: Mod+L
+    action: focus_column_right
+  - key: Mod+Down
+    action: focus_window_down
+  - key: Mod+Up
+    action: focus_window_up
+  - key: Mod+J
+    action: focus_window_down
+  - key: Mod+K
+    action: focus_window_up
+
+  # Column reordering & stacking
+  - key: Mod+Shift+Left
+    action: move_column_left
+  - key: Mod+Shift+Right
+    action: move_column_right
+  - key: Mod+Shift+H
+    action: move_column_left
+  - key: Mod+Shift+L
+    action: move_column_right
+  - key: Mod+Comma
+    action: consume_window_into_column
+  - key: Mod+Period
+    action: expel_window_from_column
+
+  # Width presets & fullscreen
+  - key: Mod+R
+    action: switch_preset_column_width
+  - key: Mod+F
+    action: maximize_column
+  - key: Mod+Shift+F
+    action: fullscreen_window
+
+  # Session control
+  - key: Mod+Shift+R
+    action: reload_config
+  - key: Mod+Shift+E
+    action: quit

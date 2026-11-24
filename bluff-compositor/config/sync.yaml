@@ -1,0 +1,10 @@
+# Opt-in GTK3/GTK4 and Qt5/Qt6 Theme Synchronization
+sync:
+  enabled: true
+  gtk3: true
+  gtk4: true
+  qt5: true
+  qt6: true
+  font_family: "JetBrains Mono"
+  font_size: 10
+  monochrome_theme: "bluff-mono-dark"

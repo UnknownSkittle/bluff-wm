@@ -1,0 +1,12 @@
+# BLUFF Visual & Shader Effects (Minimalist Monochrome Terminal)
+appearance:
+  corner_radius: 8
+  outline_width: 1
+  active_outline: "#FAFAFA"
+  inactive_outline: "#27272A"
+  outer_padding: 14
+  column_gap: 12
+  opacity: 0.96
+  blur_enabled: true
+  blur_radius: 10
+  blur_passes: 2
