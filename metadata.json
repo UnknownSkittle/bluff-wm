@@ -1,6 +1,0 @@
-{
-  "name": "BLUFF — Zig Scrolling Wayland Compositor",
-  "description": "Ultra-lightweight Zig scrolling Wayland compositor by Unknown_Skittle targeting <= 40 MiB idle RAM with modular YAML config, GTK/Qt sync, and interactive session workbench.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
